@@ -1,13 +1,29 @@
-// src/app.js
-
 import { Auth, getUser } from './auth';
-import { getUserFragments } from './api';
+
+import {
+  getUserFragments,
+  postUserFragments,
+  displayUserFragments,
+  displayUserFragmentsExpand,
+  displayUserFragmentMetaInfo,
+  deleteFragment,
+  updateFragment,
+  handleFragmentFile,
+  convertFragment,
+} from './api';
 
 async function init() {
   // Get our UI elements
   const userSection = document.querySelector('#user');
   const loginBtn = document.querySelector('#login');
   const logoutBtn = document.querySelector('#logout');
+  const postFragmentBtn = document.querySelector('#post');
+  const getFragmentBtn = document.querySelector('#get');
+  const getExpandFragmensBtn = document.querySelector('#expand');
+  const getMetaInfoFragmenBtn = document.querySelector('#metainfo');
+  const deleteBtn = document.querySelector('#delete');
+  const updateBtn = document.querySelector('#update');
+  const convertBtn = document.querySelector('#convertbtn');
 
   // Wire up event handlers to deal with login and logout.
   loginBtn.onclick = () => {
@@ -21,6 +37,49 @@ async function init() {
     Auth.signOut();
   };
 
+  // Get user fragments(Expand)
+  getMetaInfoFragmenBtn.onclick = async () => {
+    await displayUserFragmentMetaInfo(user, document);
+  };
+
+  //Get Metadata Info
+  getExpandFragmensBtn.onclick = async () => {
+    await displayUserFragmentsExpand(user, document);
+  };
+
+  // Get user fragments
+  postFragmentBtn.onclick = async () => {
+    await postUserFragments(user, document);
+  };
+
+  // Upload image - Reference: https://patrickbrosset.com/articles/2021-10-22-handling-files-on-the-web/
+  const handleFile = async (event) => {
+    await handleFragmentFile(event, user);
+  };
+  document.querySelector('#file').addEventListener('change', handleFile);
+
+  // Update fragment
+  updateBtn.onclick = async () => {
+    //console.log('updateBtn is clicked');
+    await updateFragment(user, document);
+  };
+
+  // convert fragment media type
+  convertBtn.onclick = async () => {
+    //console.log('convertBtn is clicked');
+    await convertFragment(user, document);
+  };
+
+  // Display user fragment
+  getFragmentBtn.onclick = async () => {
+    await displayUserFragments(user, document);
+  };
+
+  // Delete fragment
+  deleteBtn.onclick = async () => {
+    await deleteFragment(user, document);
+  };
+
   // See if we're signed in (i.e., we'll have a `user` object)
   const user = await getUser();
   if (!user) {
@@ -28,8 +87,9 @@ async function init() {
     logoutBtn.disabled = true;
     return;
   }
-    // Do an authenticated request to the fragments API server and log the result
-    getUserFragments(user);
+
+  // Do an authenticated request to the fragments API server and log the result
+  getUserFragments(user);
 
   // Log the user info for debugging purposes
   console.log({ user });

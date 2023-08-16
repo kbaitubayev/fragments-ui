@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>Fragments UI</title>
     <link rel="stylesheet" href="https://unpkg.com/bamboo.css" />
+    
     <script type="module" src="src/app.js"></script>
   </head>
   <body>
@@ -11,8 +12,131 @@
     <section>
       <nav><button id="login">Login</button> <button id="logout">Logout</button></nav>
     </section>
+
+    <!-- This is hidden if the user is not authenticated -->
     <section hidden id="user">
-      <h2>Hello <span class="username"></span>!</h2>
+      <h2 class="name">Hello <span class="username"></span>!</h2>
+      <br />
+
+      <div class="getdata">
+        <!-- <button name="metainfo" id="metainfo">Get your Fragment Metadata</button> -->
+        <button name="expand" id="expand">Expand your Fragments</button>
+        <p id="p"></p>
+      </div>
+
+        <br />
+
+      <!-------------------------- Create a new fragment -------------------------->
+      <div class="create_fragment_section">
+        <div class="content">
+          <div class="title_create">Create a new fragment</div>
+          <label for="content" class="content_title">Select your media type:</label>
+          <select name="content" id="content">
+            <option value="text/plain">Plain text</option>
+            <option value="text/html">HTML</option>
+            <option value="text/markdown">Markdown</option>
+            <option value="application/json">JSON</option>
+            <option value="image/png">Image/png</option>
+            <option value="image/jpeg">Image/jpeg</option>
+            <option value="image/gif">Image/gif</option>
+            <option value="image/webp">Image/webp</option>
+          </select>
+        </div>
+
+        <div class="enter_message">
+          <label for="fragment">Enter your fragment:</label>
+          <input type="text" id="fragment" name="fragment" />
+        </div>
+
+        <div class="upload">
+          <label for="file" class="upload_label">Upload your file</label>
+          <input type="file" id="file" accept="image/*, text/*" multiple />
+        </div>
+
+        <div class="enter_message_btn">
+          <input id="post" type="button" value="Create a new fragment" />
+        </div>
+      </div>
+
+      <br />
+      <!-------------------------- Manage your fragment -------------------------->
+      <div class="manage_fragment_section">
+        <div class="title_manage">Manage your fragment by id</div>
+
+        <div class="enter_id">
+          <label for="fragmentId">Enter your fragment id:</label>
+          <input type="text" id="fragmentId" name="fragmentId" />
+        </div>
+        <div class="getfragment_btn">
+         <!-- <input id="getfragment" type="button" value="Get a fragment by id" /> -->
+          <button name="metainfo" id="metainfo">Get your Fragment Metadata</button>
+          <button name="delete" id="delete">Delete Fragment</button>
+        </div>
+
+       
+      </div>
+
+      <br />
+      <!-------------------------- Update your fragment -------------------------->
+      <div class="update_fragment_section">
+        <div class="title_update">Update your fragment by id</div>
+
+        <div>
+          <label for="fragmentId">Enter your fragment id:</label>
+          <input type="text" id="update_fragmentId" name="fragmentId" />
+          <label for="fragment">Enter your new fragment:</label>
+          <input type="text" id="update_fragment" name="fragment" />
+        </div>
+
+        <div class="update_btn">
+          <button name="update" id="update">Update fragment</button>
+        </div>
+      </div>
+      <br />
+      <!-------------------------- Convert your fragment -------------------------->
+      <div class="convert_fragment_section">
+        <div class="title_convert">Convert your fragment media type by id</div>
+        <div>
+          <label for="fragmentId">Enter your fragment id:</label>
+          <input type="text" id="convert_fragmentId" name="fragmentId" />
+        </div>
+
+        <div class="convert_type">
+          <label for="convert_option">Select the convert media type:</label>
+          <select name="convert_option" id="convert_option">
+            <option value="">None</option>
+            <option value="html">HTML</option>
+            <option value="plain">PLAIN</option>
+            <option value="json">JSON</option>
+            <option value="png">PNG</option>
+            <option value="jpeg">JPEG</option>
+            <option value="webp">WEBP</option>
+            <option value="gif">GIF</option>
+          </select>
+        </div>
+
+        <div class="convert_btn">
+          <button name="convertbtn" id="convertbtn">Convert fragment media type</button>
+        </div>
+      </div>
+      <!--------------------------------------------------------------------------->
+      <br />
+
+      <div class="getall_btn"  hidden>
+        <button name="getAllFragments" id="getAllFragments" hidden>Display All Fragments</button>
+      </div>
+
+      <!-- <div class="delete_btn">
+        <button name="delete" id="delete">Delete Fragment</button>
+      </div> -->
+
+      <div class="convert_btn" >
+        <input name id="get" type="button" value="GET" hidden/>
+      </div>
+
+      <!-- <div class="update_btn">
+        <input name="update" id="update" type="button" value="UPDATE" />
+      </div> -->
     </section>
-  </body>
+    </body>
 </html>
